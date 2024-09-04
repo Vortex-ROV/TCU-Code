@@ -37,4 +37,4 @@ To set up the TCU software on your development environment, follow these steps:
 - **`/src`:** Core source code for communication, control, and data processing.
 - **`/tests`:** Test cases to validate the software's functionality and performance.
 - **`main.py`:** Main script used to launch the TCU.
-- **`Project_Config.toml`:** Configuration file for packaging TCU code.
+- **`TCU.toml`:** Configuration file for packaging TCU code.
