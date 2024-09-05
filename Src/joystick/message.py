@@ -3,8 +3,11 @@ import struct
 
 
 class Message:
-
+    """
+    Class for abstracting the message sent from the TCU to the ROV companion computer
+    """
     def __init__(self, msg=b"") -> None:
+        # default message
         self.__msg = {
             "throttle": 1500,
             "yaw": 1500,
@@ -21,6 +24,7 @@ class Message:
             "joystick_connect": False,
         }
 
+        # recreate dictionary using provided bytes of message
         if msg != b"":
             index = 0
             for key in self.__msg.keys():
@@ -42,6 +46,9 @@ class Message:
                     raise Exception("Unrecognised data type")
 
     def bytes(self) -> bytes:
+        """
+        Get the bytes representation of the message to be sent through the socket
+        """
         b = b""
         for key in self.__msg.keys():
             if isinstance(self.__msg[key], int):
@@ -57,9 +64,20 @@ class Message:
         return b
 
     def get_value(self, key):
+        """
+        Get the value of a key from the message dictionary
+        """
         return self.__msg[key]
 
     def set_value(self, key, value) -> None:
+        """
+        Set the value of a key in the message dictionary
+
+        ### Notes:
+            - Can not create new keys in the dictionary
+            - Can only override message values with values of the same type
+            - Can only override string type message values with those of the same length
+        """
         if (
             key in self.__msg
             and type(self.__msg[key]) == type(value)
