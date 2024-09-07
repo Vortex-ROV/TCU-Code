@@ -18,7 +18,8 @@ class Modes:
         self.manual_mode = manual_mode
 
     def handle_joystick_logic(self, data):
-        data = data.decode('utf-8')
+        pass
+        """data = data.decode('utf-8')
         mode = data[22]
 
         if mode=='M':
@@ -44,7 +45,7 @@ class Modes:
             self.stabilize_mode.setStyleSheet("background-color: #fd8a44;color: white;border-radius: 5px;")
             self.autonmous_mode.setStyleSheet("background-color: #171717;color: white;border-radius: 5px;")
             self.depth_hold_mode.setStyleSheet("background-color: #171717;color: white;border-radius: 5px;")
-            self.manual_mode.setStyleSheet("background-color: #171717;color: white;border-radius: 5px;")
+            self.manual_mode.setStyleSheet("background-color: #171717;color: white;border-radius: 5px;")"""
 
     def current_modedef(self, clicked_button):
         clicked_button = self.sender()
