@@ -21,6 +21,8 @@ class Status:
             self.socket_status.setText(" Disconnected")
 
     def handle_joystick_logic(self, data):
+        pass
+        """
         data = data.decode('utf-8')
         lights = data[18]
         armed = int(data[21])
@@ -53,3 +55,4 @@ class Status:
             self.rov_status.setText(" Disarmed")
         else:
             self.rov_status.setText(" Error")
+        """

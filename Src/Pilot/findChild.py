@@ -11,7 +11,7 @@ from Status.status import Status
 class UI(QMainWindow):
     def __init__(self):
         super(UI, self).__init__()
-        uic.loadUi("pilot.ui", self)
+        uic.loadUi("src/pilot.ui", self)
         # Cameras
         self.camera = self.findChild(QLabel, 'camera')
         self.takephoto = self.findChild(QPushButton, "takephoto")

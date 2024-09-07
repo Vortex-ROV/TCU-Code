@@ -21,9 +21,11 @@ class Grippers:
         self.connection = data
 
     def handle_joystick_logic(self, data):
+        pass
         # if not self.connection:
         #     return
         
+        """
         data = data.decode('utf-8')
 
         first_gripper = int(data[16])
@@ -70,6 +72,7 @@ class Grippers:
                 self.movie.setScaledSize(self.rotGripper.size())  # Scale the movie to match the size of the label
                 self.rotGripper.setMovie(self.movie)
                 self.movie.start()
+        """
         
 
     def gripper_background(self, path):

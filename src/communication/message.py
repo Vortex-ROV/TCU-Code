@@ -6,6 +6,7 @@ class Message:
     """
     Class for abstracting the message sent from the TCU to the ROV companion computer
     """
+
     def __init__(self, msg=b"") -> None:
         # default message
         self.__msg = {
@@ -13,12 +14,10 @@ class Message:
             "yaw": 1500,
             "forward": 1500,
             "lateral": 1500,
-            
             "gripper_1": False,
             "gripper_2": False,
             "light": "0",
             "rotating_gripper": "O",
-
             "armed": False,
             "flight_mode": "M",
             "joystick_connect": False,
@@ -93,6 +92,9 @@ class Message:
 
     def __eq__(self, value) -> bool:
         return self.__msg == value.__msg
+
+    def __str__(self) -> str:
+        return str(self.__msg)
 
 
 class Test(unittest.TestCase):
