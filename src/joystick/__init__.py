@@ -1,1 +1,1 @@
-import joystick
+from .joystick import JoyStick
