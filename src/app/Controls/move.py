@@ -13,7 +13,7 @@ class Move(QWidget):
         self.turn_change_background("src/assets/images/turn.png")
         self.up_down_change_background("src/assets/images/up_down.png")
         self.connection = False
-        
+
     def socket_connection(self, data):
         self.connection = data
         

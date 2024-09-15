@@ -1,4 +1,4 @@
-from  PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow
 import sys
 from src.ui.design import Ui_VortexGUI
 from src.app import Backend

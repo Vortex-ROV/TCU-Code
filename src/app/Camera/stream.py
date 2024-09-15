@@ -15,7 +15,7 @@ class CameraThread(QThread):
             if ret:
                 rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 self.frame_updated.emit(rgb_image)
-            self.msleep(50)
+            self.msleep(25)
         self.cap.release()
 
 class Stream:
@@ -24,6 +24,7 @@ class Stream:
         self.camera_thread = CameraThread()
         self.camera_thread.frame_updated.connect(self.update_frame)
         self.camera_thread.start()
+        self.camera_thread.setPriority(QThread.HighestPriority)
 
     def update_frame(self, frame):
         h, w, ch = frame.shape

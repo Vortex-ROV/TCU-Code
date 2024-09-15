@@ -1,3 +1,4 @@
+# from .Camera.camera import Camera
 from .Camera.stream import Stream
 from .Stopwatch.stopwatch import Stopwatch
 from .Controls.move import Move

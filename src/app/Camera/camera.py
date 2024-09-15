@@ -21,26 +21,24 @@ class CameraThread(QThread):
             pattern = 1,
             receive_mode = True,
             logging = True,
+            request_timeout = sys.maxsize,
             **options
         )
 
     def run(self):
         i=0
         while True:
-            frame = self.client.recv()
+            frame = self.client.recv() # A frame is sent every 50 milliseconds, and maybe every 25 milliseconds
             i+=1
             if frame is not None:
                 # rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 rotated_frame = cv2.rotate(frame, cv2.ROTATE_180)
                 # cv2.imshow("Hello",rotated_frame)
-                
-                
                 key = cv2.waitKey(1) 
                 if key == ord(' '):
                     frame_filename = os.path.join("D:/frames", "frame_{}.jpg".format(len(os.listdir("frames"))))
                     cv2.imwrite(frame_filename, rotated_frame)
                     # cv2.imwrite(f"frame {i}",rotated_frame)
-                # Convert BGR to RGB
                 rgb_image = cv2.cvtColor(rotated_frame, cv2.COLOR_BGR2RGB)
                 cv2.imshow("555555",rotated_frame)
                 self.frame_updated.emit(rgb_image)
@@ -54,6 +52,7 @@ class Camera:
         self.camera_thread.frame_updated.connect(self.update_frame)
         self.takephoto.clicked.connect(self.save_frame)
         self.camera_thread.start()
+        self.camera_thread.setPriority(QThread.HighestPriority)
 
     def update_frame(self, frame):
         h, w, ch = frame.shape
@@ -72,4 +71,3 @@ class Camera:
             frame_filename = os.path.join("frames", "frame_{}.jpg".format(len(os.listdir("frames"))))
             cv2.imwrite(frame_filename, cv2.cvtColor(frame_array, cv2.COLOR_RGB2BGR))
             print("Frame saved:", frame_filename)
-    
