@@ -32,14 +32,8 @@ class Grippers:
 
         if first_gripper == 1:
             self.gripper_background("src/assets/images/gripperOpen.png")
-            # self.gripper_background("src/assets/images/gripperOpen.png")
         else:
             self.gripper_background("src/assets/images/gripperClose.png")
-            #self.label_raise.setStyleSheet("image:url(:/icons/raisearrow.svg);")
-        # if sec_gripper == 1:
-        #     self.rotGripper_background(":/img/rotGripper_open.png")
-        # else:
-        #     self.rotGripper_background(":/img/rotGripper_close.png")
         if gripper_rotation == "O":
             if sec_gripper == 1:
                 self.rotGripper_background("src/assets/images/rotGripperOpen.png")
@@ -47,7 +41,6 @@ class Grippers:
                 self.rotGripper_background("src/assets/images/rotGripperClose.png")
         elif gripper_rotation == "L":
             if sec_gripper == 1:
-                # self.movie = QMovie("rot_gripper_open_cw.gif")
                 self.movie = QMovie("src/assets/gifs/rotGripperOpenCW.gif")
                 self.movie.setScaledSize(self.rotGripper.size())
                 self.rotGripper.setMovie(self.movie)

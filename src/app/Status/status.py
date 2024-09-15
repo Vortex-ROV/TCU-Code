@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import QWidget
 
 class Status:
     def __init__(self, ui):
-        # super(Status, self).__init__()
 
         self.ui = ui
 

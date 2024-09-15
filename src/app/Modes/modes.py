@@ -3,7 +3,6 @@ from PyQt5.QtWidgets import QWidget
 
 class Modes:
     def __init__(self, ui):
-        # super(Modes, self).__init__()
         self.ui = ui
 
     def handle_joystick_logic(self, data):
