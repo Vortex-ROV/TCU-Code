@@ -153,8 +153,6 @@ class JoyStick(QThread):
             self.__message.set_value("forward", 1500)
             self.__message.set_value("lateral", 1500)
 
-        print(self.__message, end="\r")
-
         self.send_values()
 
         # auto transplanting :(

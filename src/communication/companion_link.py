@@ -22,7 +22,6 @@ class CompanionLink(QThread):
 
     def send_control_commands(self, data):
         self.client.send(data)
-        print(data)
 
     def change_buffer_size(self, buff_size):
         self.__buffer_size = buff_size
