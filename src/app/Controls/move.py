@@ -21,7 +21,7 @@ class Move(QWidget):
         pass
         # if not self.connection:
             # return
-        """
+        
         data = data.decode('utf-8')
         raise_descend =int(data[0:4])
         rotation = int(data[4:8])
@@ -67,43 +67,26 @@ class Move(QWidget):
             self.turning.setMovie(self.movie)
             self.movie.start()
         else:
-<<<<<<<< HEAD:src/Controls/move.py
-            self.turn_change_background("turn.png")
-        """
-        
-========
             self.turn_change_background("src/assets/images/turn.png")
->>>>>>>> main:src/app/Controls/move.py
+
     def movment_change_background(self, path):
         movment_pixmap = QPixmap(path)
         size = self.ui.movment.size()
         movmentscaled_pixmap = movment_pixmap.scaled(size, aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
-<<<<<<<< HEAD:src/Controls/move.py
-        self.movment.setPixmap(movmentscaled_pixmap)
-
-========
         self.ui.movment.setPixmap(movmentscaled_pixmap)
->>>>>>>> main:src/app/Controls/move.py
+
     def up_down_change_background(self, path):
         up_down_pixmap = QPixmap(path)
         size = self.ui.up_down.size()
         up_down_scaled_pixmap = up_down_pixmap.scaled(size, aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
-<<<<<<<< HEAD:src/Controls/move.py
         self.up_down.setPixmap(up_down_scaled_pixmap)
 
-========
-        self.ui.up_down.setPixmap(up_down_scaled_pixmap)
->>>>>>>> main:src/app/Controls/move.py
     def turn_change_background(self, path):
         turning_pixmap = QPixmap(path)
         size = self.ui.turning.size()
         turningscaled_pixmap = turning_pixmap.scaled(size, aspectRatioMode=Qt.KeepAspectRatio, transformMode=Qt.SmoothTransformation)
-<<<<<<<< HEAD:src/Controls/move.py
-        self.turning.setPixmap(turningscaled_pixmap)
-        
-========
         self.ui.turning.setPixmap(turningscaled_pixmap)
->>>>>>>> main:src/app/Controls/move.py
+
     def turn_bg_change_background(self, path):
         turning_bg_pixmap = QPixmap(path)
         size = self.ui.turning_bg.size()

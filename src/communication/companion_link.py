@@ -1,11 +1,13 @@
 from PyQt5.QtCore import QThread, pyqtSignal
 from communication.client import ClientSocket
 import time
+
+
 class CompanionLink(QThread):
     sensors_to_gui_signal = pyqtSignal(bytes)
     connected_signal = pyqtSignal(bool)
 
-    def __init__(self, address="192.168.33.1", port=12345, buffer_size=48):
+    def __init__(self, address="192.168.33.1", port=12345, buffer_size=51):
         super().__init__()
 
         self.client = ClientSocket(address, port, self.connected_signal)
