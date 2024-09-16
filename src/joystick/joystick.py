@@ -6,6 +6,7 @@ import json
 import pygame
 from PyQt5.QtCore import QThread, pyqtSignal
 import time
+
 # from auto_transplanting import AutoTransplanting
 
 
@@ -32,7 +33,7 @@ class JoyStick(QThread):
 
         # self.auto_transplanting = AutoTransplanting(1)
 
-    def __get_button_state(self, butt_num, toggle = True):
+    def __get_button_state(self, butt_num, toggle=True):
         if not toggle:
             return self.__joystick.get_button(butt_num)
 
@@ -42,7 +43,7 @@ class JoyStick(QThread):
 
         self.__prev_input[butt_num] = input
         return self.__prev_state[butt_num]
-    
+
     def __map_axis(self, axis_value) -> int:
         base = 1500
         range = 160
@@ -51,55 +52,92 @@ class JoyStick(QThread):
         if axis_value > tolerance or axis_value < -tolerance:
             return int(axis_value * range + base)
         else:
-            return 0
+            return 1500
 
     def __handle_input(self):
-        self.__message.set_value("throttle", self.__map_axis(self.__joystick.get_axis(self.__configs["throttle"])))
-        self.__message.set_value("yaw", self.__map_axis(
-            (self.__joystick.get_axis(self.__configs["yaw_r"]) / 2 + 0.5) - (self.__joystick.get_axis(self.__configs["yaw_l"]) / 2 + 0.5))
+        self.__message.set_value(
+            "throttle",
+            self.__map_axis(self.__joystick.get_axis(self.__configs["throttle"])),
         )
-        self.__message.set_value("forward", self.__map_axis(-self.__joystick.get_axis(self.__configs["forward"])))
-        self.__message.set_value("lateral", self.__map_axis(self.__joystick.get_axis(self.__configs["lateral"])))
+        self.__message.set_value(
+            "yaw",
+            self.__map_axis(
+                (self.__joystick.get_axis(self.__configs["yaw_r"]) / 2 + 0.5)
+                - (self.__joystick.get_axis(self.__configs["yaw_l"]) / 2 + 0.5)
+            ),
+        )
+        self.__message.set_value(
+            "forward",
+            self.__map_axis(-self.__joystick.get_axis(self.__configs["forward"])),
+        )
+        self.__message.set_value(
+            "lateral",
+            self.__map_axis(self.__joystick.get_axis(self.__configs["lateral"])),
+        )
 
-        self.__message.set_value("gripper_1", self.__get_button_state(self.__configs["gripper_1"]))
-        self.__message.set_value("gripper_2", self.__get_button_state(self.__configs["gripper_2"]))
+        self.__message.set_value(
+            "gripper_1", self.__get_button_state(self.__configs["gripper_1"])
+        )
+        self.__message.set_value(
+            "gripper_2", self.__get_button_state(self.__configs["gripper_2"])
+        )
 
         if self.__get_button_state(self.__configs["light"]):
             self.__message.set_value("light", "H")
         else:
             self.__message.set_value("light", "0")
 
-        self.__arm_rotating_gripper = self.__get_button_state(self.__configs["arm_rotating_gripper"])
+        self.__arm_rotating_gripper = self.__get_button_state(
+            self.__configs["arm_rotating_gripper"]
+        )
 
         if (
             self.__arm_rotating_gripper
-            and self.__get_button_state(self.__configs["rotating_gripper_left"], toggle=False)
-            and not self.__get_button_state(self.__configs["rotating_gripper_right"], toggle=False)
+            and self.__get_button_state(
+                self.__configs["rotating_gripper_left"], toggle=False
+            )
+            and not self.__get_button_state(
+                self.__configs["rotating_gripper_right"], toggle=False
+            )
         ):
             self.__message.set_value("rotating_gripper", "L")
         elif (
             self.__arm_rotating_gripper
-            and self.__get_button_state(self.__configs["rotating_gripper_right"], toggle=False)
-            and not self.__get_button_state(self.__configs["rotating_gripper_left"], toggle=False)
+            and self.__get_button_state(
+                self.__configs["rotating_gripper_right"], toggle=False
+            )
+            and not self.__get_button_state(
+                self.__configs["rotating_gripper_left"], toggle=False
+            )
         ):
             self.__message.set_value("rotating_gripper", "R")
         else:
             self.__message.set_value("rotating_gripper", "O")
 
-        if not self.__message.get_value("armed") and self.__get_button_state(self.__configs["arm"], toggle=False):
+        if not self.__message.get_value("armed") and self.__get_button_state(
+            self.__configs["arm"], toggle=False
+        ):
             self.__message.set_value("armed", True)
-        if self.__message.get_value("armed") and self.__get_button_state(self.__configs["disarm"], toggle=False):
+        if self.__message.get_value("armed") and self.__get_button_state(
+            self.__configs["disarm"], toggle=False
+        ):
             self.__message.set_value("armed", False)
 
         # set flight modes
-        if self.__joystick_name == "Xbox 360 Controller" or self.__joystick_name == "Controller (Xbox One For Windows)":
+        if (
+            self.__joystick_name == "Xbox 360 Controller"
+            or self.__joystick_name == "Controller (Xbox One For Windows)"
+        ):
             if self.__joystick.get_hat(0)[0] == 1:
                 self.__message.set_value("flight_mode", "S")
             elif self.__joystick.get_hat(0)[0] == -1:
                 self.__message.set_value("flight_mode", "A")
             elif self.__joystick.get_hat(0)[1] == 1:
                 self.__message.set_value("flight_mode", "M")
-        elif self.__joystick_name == "DualSense Wireless Controller" or self.__joystick_name == "PS4 Controller":
+        elif (
+            self.__joystick_name == "DualSense Wireless Controller"
+            or self.__joystick_name == "PS4 Controller"
+        ):
             if self.__joystick.get_button(11):
                 self.__message.set_value("flight_mode", "S")
             elif self.__joystick.get_button(12):
@@ -108,14 +146,14 @@ class JoyStick(QThread):
                 self.__message.set_value("flight_mode", "M")
 
         # set flight mode to depth hold and stop motor control when rotating gripper is armed
-        if self.__arm_rotating_gripper == 1:
+        if self.__arm_rotating_gripper:
             self.__message.set_value("flight_mode", "A")
-            self.__message.set_value("throttle", 0)
-            self.__message.set_value("yaw", 0)
-            self.__message.set_value("forward", 0)
-            self.__message.set_value("lateral", 0)
+            self.__message.set_value("throttle", 1500)
+            self.__message.set_value("yaw", 1500)
+            self.__message.set_value("forward", 1500)
+            self.__message.set_value("lateral", 1500)
 
-        print(self.__message, end='\r')
+        print(self.__message, end="\r")
 
         self.send_values()
 
