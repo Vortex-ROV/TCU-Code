@@ -1,1 +1,3 @@
-import src
+import src as TCU
+
+TCU.initialize()
