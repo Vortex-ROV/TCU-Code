@@ -1,6 +1,8 @@
 from PyQt5.QtCore import QThread, pyqtSignal
-from src.communication.client import ClientSocket
+from communication.client import ClientSocket
 import time
+
+
 class CompanionLink(QThread):
     sensors_to_gui_signal = pyqtSignal(bytes)
     connected_signal = pyqtSignal(bool)
@@ -20,7 +22,6 @@ class CompanionLink(QThread):
 
     def send_control_commands(self, data):
         self.client.send(data)
-        print(data)
 
     def change_buffer_size(self, buff_size):
         self.__buffer_size = buff_size

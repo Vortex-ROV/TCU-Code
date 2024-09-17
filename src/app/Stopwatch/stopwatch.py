@@ -1,21 +1,20 @@
-from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import QTimer
 
 class Stopwatch:
     def __init__(self, ui):
+
         self.ui = ui
-        
         self.ui.time_start.clicked.connect(self.start_timer)
         self.ui.time_stop.clicked.connect(self.stop_timer)
         self.ui.time_reset.clicked.connect(self.reset_timer)
 
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_timer)
-        self.time_remaining = 15 * 60 * 1000  # 15 minutes in milliseconds
+        self.time_remaining = 15 * 60 * 1000
 
     def start_timer(self):
         if not self.timer.isActive():
-            self.timer.start(1000)  # Update timer every second
+            self.timer.start(1000)
 
     def stop_timer(self):
         if self.timer.isActive():

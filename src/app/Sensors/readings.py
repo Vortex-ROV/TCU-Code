@@ -37,11 +37,11 @@ class Readings:
         # self.gyro_x.setText(f"  Gyro X: {gyro_x_read}")
         # self.gyro_y.setText(f"  Gyro Y: {gyro_y_read}")
         # self.gyro_z.setText(f"  Gyro Z: {gyro_z_read}")
-        self.ui.pressure.setText(f"  Pressure: {pressure_read}")
-        self.ui.temp.setText(f"  Temp: {str(updated_temp)}")
-        self.ui.compass_label.setText(f"Compass: {str(compass_read)}")
-        self.ui.compass_image.update_angle(int(compass_read))
-        self.ui.lcd.display(f"{str(updated_temp)}")
+        # self.ui.pressure.setText(f"  Pressure: {pressure_read}")
+        # self.ui.temp.setText(f"  Temp: {str(updated_temp)}")
+        # self.ui.compass_label.setText(f"Compass: {str(compass_read)}")
+        # self.ui.compass_image.update_angle(int(compass_read))
+        # self.ui.lcd.display(f"{str(updated_temp)}")
 
     def strip(self, str):
         stripped = str.lstrip('0')

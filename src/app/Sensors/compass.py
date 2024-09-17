@@ -9,8 +9,6 @@ class CompassWidget(QWidget):
     def __init__(self, ui):
         super().__init__()
 
-        
-
         self.setWindowTitle('Compass Widget')
         self.setGeometry(100, 100, 100, 100)
 

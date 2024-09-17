@@ -1,9 +1,9 @@
-from  PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow
 import sys
-from src.ui.design import Ui_VortexGUI
-from src.app import Backend
-from src.joystick import JoyStick
-from src.communication.companion_link import CompanionLink
+from .ui.design import Ui_VortexGUI
+from .app import Backend
+from joystick.joystick import JoyStick
+from communication.companion_link import CompanionLink
 
 app = QApplication(sys.argv)
 VortexGUI = QMainWindow()
@@ -13,7 +13,7 @@ backend = Backend()
 backend.setupUi(ui)
 VortexGUI.show()
 joystick_thread = JoyStick()
-companion_link = CompanionLink(address="192.168.33.1", port=12345)
+companion_link = CompanionLink(address="192.168.33.1", port=4096)
 companion_link.connect_client_signal(backend.moving.socket_connection)
 companion_link.connect_client_signal(backend.status.socket_connection)
 companion_link.connect_client_signal(backend.grippers.socket_connection)
@@ -23,7 +23,7 @@ joystick_thread.connect_signal(backend.grippers.handle_joystick_logic)
 joystick_thread.connect_signal(backend.modes.handle_joystick_logic)
 joystick_thread.connect_signal(backend.status.handle_joystick_logic)
 joystick_thread.connect_signal(companion_link.send_control_commands)
-joystick_thread.connect_signal(print)
+# joystick_thread.connect_signal(print)
 companion_link.start()
 joystick_thread.start()
 app.exec_()

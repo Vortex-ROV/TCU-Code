@@ -1,14 +1,14 @@
 from PyQt5.QtWidgets import QWidget
+from communication.message import Message
 
 
 class Modes:
     def __init__(self, ui):
-        # super(Modes, self).__init__()
         self.ui = ui
 
     def handle_joystick_logic(self, data):
-        data = data.decode('utf-8')
-        mode = data[22]
+        data = Message(data)
+        mode = data.get_value("flight_mode")
 
         if mode=='M':
             self.ui.current_mode.setText("  Current Mode: Manual")
@@ -39,4 +39,3 @@ class Modes:
         clicked_button = self.sender()
         button_text = clicked_button.text()
         self.ui.current_mode.setText(f"  Current Mode: {button_text}")
-
