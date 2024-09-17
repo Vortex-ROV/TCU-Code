@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>WebRTC Video Stream</h1>
+    <video id="localVideo" autoplay playsinline></video>
+
+    <script>
+      const localVideo = document.getElementById("localVideo");
+      const pc = new RTCPeerConnection();
+
+      // Handle incoming video stream
+      pc.ontrack = (event) => {
+        localVideo.srcObject = event.streams[0];
+      };
+
+      async function start() {
+        // Fetch the local video stream from the webcam
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        stream.getTracks().forEach((track) => pc.addTrack(track, stream));
+
+        // Create an offer and send it to the signaling server
+        const offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+
+        const response = await fetch("/offer", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sdp: pc.localDescription.sdp,
+            type: pc.localDescription.type,
+          }),
+        });
+
+        const answer = await response.json();
+        await pc.setRemoteDescription(new RTCSessionDescription(answer));
+      }
+
+      // Start the WebRTC connection
+      start();
+    </script>
+  </body>
+</html>

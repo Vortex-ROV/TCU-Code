@@ -1,0 +1,2 @@
+for testing streaming via web rtc
+pip install aiortc opencv-python aiohttp
