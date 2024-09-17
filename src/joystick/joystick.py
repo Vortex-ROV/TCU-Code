@@ -196,7 +196,6 @@ class JoyStick(QThread):
         try:
             with open(json_path) as f:
                 data = json.load(f)
-            f.close()
         except FileNotFoundError:
             print("File not found. Please provide a valid file path.")
         
