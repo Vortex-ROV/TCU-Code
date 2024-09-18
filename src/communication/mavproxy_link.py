@@ -10,13 +10,13 @@ from pixhawk.pixhawk_sensors import PixhawkSensors
 
 
 class MavproxyLink:
-    def __init__(self, pixhawk: Pixhawk, pix_sensors: PixhawkSensors, ip_address: str = "192.168.33.100", port: int = 14550, baudrate: int = 115200) -> None:
-        self.__pixhawk = pixhawk
-        self.__pix_sensors = pix_sensors
+    def __init__(self, ip_address: str = "192.168.33.100", port: int = 14550, baudrate: int = 115200) -> None:
+        self.__pixhawk = Pixhawk()
         self.__pixhawk.master = mavutil.mavlink_connection("udp:" + ip_address + ":" + str(port), baudrate)
         self.__pixhawk.master.wait_heartbeat()
-
         print("Connected To Mavproxy")
+
+        self.__pix_sensors = PixhawkSensors(self.__pixhawk.master)
 
         self.__sensors_msg = SensorMessage()
         self.__old_sensors_msg = SensorMessage()

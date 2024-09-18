@@ -44,6 +44,29 @@ class Message:
                 else:
                     raise Exception("Unrecognised data type")
 
+    def recreate_msg(self, msg: bytes) -> None:
+        if msg == b"":
+            return
+
+        index = 0
+        for key in self.__msg.keys():
+            if isinstance(self.__msg[key], int):
+                self.__msg[key] = int.from_bytes(msg[index : index + 4], "big")
+                index += 4
+            elif isinstance(self.__msg[key], float):
+                self.__msg[key] = struct.unpack("d", msg[index : index + 8])[0]
+                index += 8
+            elif isinstance(self.__msg[key], str):
+                self.__msg[key] = "".join(
+                    map(chr, msg[index : index + len(self.__msg[key])])
+                )
+                index += len(self.__msg[key])
+            elif isinstance(self.__msg[key], bool):
+                self.__msg[key] = bool.from_bytes(msg[index], "big")
+                index += 1
+            else:
+                raise Exception("Unrecognised data type")
+
     def bytes(self) -> bytes:
         """
         Get the bytes representation of the message to be sent through the socket
