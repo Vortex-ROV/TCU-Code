@@ -4,6 +4,7 @@ Remember the following:
     2. try changing jpeg quality at both ends
     3. try increasing maxSize
     4. consider reducing the frame rate slightly
+    5. try using NetGear_Async instead of NetGear
 """
 
 
