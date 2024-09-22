@@ -1,3 +1,12 @@
+""" 
+Remember the following:
+    1. try UDP and know yhy it is not working
+    2. try changing jpeg quality at both ends
+    3. try increasing maxSize
+    4. consider reducing the frame rate slightly
+"""
+
+
 import time
 import cv2
 import numpy as np
