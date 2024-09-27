@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QPixmap, QImage
-from PyQt5.QtCore import QThread, pyqtSignal
+from PyQt5.QtCore import QThread, pyqtSignal, Qt
 import cv2
 from vidgear.gears import NetGear
 import sys
@@ -59,6 +59,7 @@ class Camera:
         h, w, ch = frame.shape
         Qframe = QImage(frame.data, w, h, ch * w, QImage.Format_RGB888)
         pixmap = QPixmap.fromImage(Qframe)
+        pixmap = pixmap.scaled(self.ui.camera.size(), Qt.IgnoreAspectRatio, Qt.SmoothTransformation)
         self.ui.camera.setPixmap(pixmap)
     
     # def save_frame(self):
