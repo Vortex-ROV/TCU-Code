@@ -39,21 +39,44 @@ def main():
     """
     # Create the client object
     Client = NetgearClient()
-    t = time.time()
+
+    # Time measurements
+    frame_count = 5000
+    latencies = []
+
     # Loop to receive frames
-    for i in range(5000):
+    start_time = time.time()
+    # Loop to receive frames
+    for i in range(frame_count):
+
+        receive_start_time = time.time()
         # Receive frames from the server
         frame = Client.client.recv()
         # If NoneType
         if frame is None:
             break
+
+        display_start_time = time.time()
+
         # Display the frame
         cv2.imshow("frame",frame)
         cv2.waitKey(1)
+
+        # Calculate latency
+        latency = display_start_time - receive_start_time
+        latencies.append(latency)
+
+    # Calculate and print average latency
+    avg_latency = sum(latencies) / len(latencies) if latencies else 0
+    print(f"Average Latency: {avg_latency:.4f} seconds")
+
     # Calculate the frame rate
-    print(5000/(time.time()-t))
-    # Close the stream
+    total_time = time.time() - start_time
+    print(f"Frame Rate: {frame_count / total_time:.2f} frames per second")
+
     Client.client.close()
+    cv2.destroyAllWindows()
+    
 
 if __name__ == "__main__":
     main()
