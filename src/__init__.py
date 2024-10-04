@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow
 import sys
-from .ui.newDesign import Ui_VortexGUI
+from .ui.design import Ui_VortexGUI
 from .app import Backend
 from joystick.joystick import JoyStick
 from communication.companion_link import CompanionLink
