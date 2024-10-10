@@ -1,9 +1,9 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow
 import sys
-from src.ui.design import Ui_VortexGUI
-from src.app import Backend
-from src.joystick import JoyStick
-from src.communication.companion_link import CompanionLink
+from .ui.design import Ui_VortexGUI
+from .app import Backend
+from joystick.joystick import JoyStick
+from communication.companion_link import CompanionLink
 
 app = QApplication(sys.argv)
 VortexGUI = QMainWindow()

@@ -29,7 +29,7 @@
    <double>1.000000000000000</double>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #171717;</string>
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
@@ -62,47 +62,12 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #171717;
+     <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;</string>
     </property>
     <property name="text">
      <string>  Current Mode: </string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="camera">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>70</y>
-      <width>1530</width>
-      <height>670</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>8</pointsize>
-     </font>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: transparent;
-border-radius: 5px;
-</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="title">
@@ -129,7 +94,7 @@ border-radius: 5px;
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #212121;
+     <string notr="true">background-color: rgba(33, 33, 33, 0.2);
 color: white;
 border-radius: 5px;
 </string>
@@ -163,7 +128,7 @@ border-radius: 5px;
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #212121;
+     <string notr="true">background-color: rgba(33, 33, 33, 0.2);
 color: white;
 border-radius: 5px;
 </string>
@@ -191,7 +156,7 @@ border-radius: 5px;
      </sizepolicy>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #212121;
+     <string notr="true">background-color: rgba(33, 33, 33, 0.2);
 color: white;
 border-radius: 5px;
 </string>
@@ -223,7 +188,7 @@ border-radius: 5px;
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #171717;
+      <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;</string>
      </property>
@@ -261,7 +226,7 @@ border-radius: 5px;</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #171717;
+      <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;</string>
      </property>
@@ -299,7 +264,7 @@ border-radius: 5px;</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #171717;
+      <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;</string>
      </property>
@@ -361,7 +326,7 @@ color: white;
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #171717;
+      <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;</string>
      </property>
@@ -422,8 +387,7 @@ border-radius: 5px;
      </sizepolicy>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(255, 255, 255);
-color: white;
+     <string notr="true">color: white;
 border-radius: 5px;
 </string>
     </property>
@@ -450,8 +414,7 @@ border-radius: 5px;
      </sizepolicy>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(255, 255, 255);
-color: white;
+     <string notr="true">color: white;
 border-radius: 5px;</string>
     </property>
     <property name="text">
@@ -477,8 +440,7 @@ border-radius: 5px;</string>
      </sizepolicy>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(255, 255, 255);
-color: white;
+     <string notr="true">color: white;
 border-radius: 5px;</string>
     </property>
     <property name="text">
@@ -504,8 +466,7 @@ border-radius: 5px;</string>
      </sizepolicy>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(255, 255, 255);
-color: white;
+     <string notr="true">color: white;
 border-radius: 5px;
 </string>
     </property>
@@ -573,7 +534,7 @@ border-radius: 5px;
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #212121;
+     <string notr="true">background-color: rgba(33, 33, 33, 0.2);
 color: white;
 border-radius: 5px;
 </string>
@@ -585,13 +546,13 @@ border-radius: 5px;
      <set>Qt::AlignJustify|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="turning_bg">
+   <widget class="QLabel" name="camera">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>815</y>
-      <width>150</width>
-      <height>150</height>
+      <x>4</x>
+      <y>5</y>
+      <width>1900</width>
+      <height>990</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -601,35 +562,7 @@ border-radius: 5px;
      </sizepolicy>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(255, 255, 255);
-color: white;
-border-radius: 5px;
-</string>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="background_label">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1920</width>
-      <height>991</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: #171717;</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string/>
@@ -651,7 +584,7 @@ border-radius: 5px;
      </sizepolicy>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #212121;
+     <string notr="true">background-color: rgba(33, 33, 33, 0.2);
 color: white;
 border-radius: 5px;
 </string>
@@ -669,7 +602,7 @@ border-radius: 5px;
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #171717;
+      <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border: none;
 border-radius: 5px;</string>
@@ -694,7 +627,7 @@ border-radius: 5px;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton{
-background-color: #171717;
+background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;
 }
@@ -731,7 +664,7 @@ QPushButton:hover {
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #171717;
+      <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;</string>
      </property>
@@ -763,7 +696,7 @@ border-radius: 5px;</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #171717;
+      <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;</string>
      </property>
@@ -788,7 +721,7 @@ border-radius: 5px;</string>
      </sizepolicy>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #212121;
+     <string notr="true">background-color: rgba(33, 33, 33, 0.2);
 color: white;
 border-radius: 5px;
 </string>
@@ -814,7 +747,7 @@ border-radius: 5px;
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #171717;
+      <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-top: white 3px solid;
 border-radius: 5px;</string>
@@ -841,7 +774,7 @@ border-radius: 5px;</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #171717;
+      <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-top: white 3px solid;
 border-radius: 5px;</string>
@@ -894,7 +827,7 @@ color: white;
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #171717;
+      <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-top: white 3px solid;
 border-radius: 5px;</string>
@@ -953,7 +886,7 @@ color: white;
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #171717;
+      <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-top: white 3px solid;
 border-radius: 5px;</string>
@@ -1144,7 +1077,7 @@ background-color: transparent;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #171717;
+     <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;</string>
     </property>
@@ -1173,7 +1106,7 @@ border-radius: 5px;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #171717;
+     <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;</string>
     </property>
@@ -1202,7 +1135,7 @@ border-radius: 5px;</string>
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #171717;
+     <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;
 
@@ -1233,7 +1166,7 @@ border-radius: 5px;
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #171717;
+     <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;</string>
     </property>
@@ -1260,8 +1193,7 @@ border-radius: 5px;</string>
      </sizepolicy>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:transparent;
-color: white;
+     <string notr="true">color: white;
 border-radius: 5px;
 </string>
     </property>
@@ -1282,8 +1214,7 @@ border-radius: 5px;
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color:rgb(255, 255, 255);
-color: white;
+     <string notr="true">color: white;
 border-radius: 5px;
 </string>
     </property>
@@ -1334,29 +1265,6 @@ border-radius: 5px;
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
     </property>
    </widget>
-   <widget class="QFrame" name="camera_frame">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>60</y>
-      <width>1550</width>
-      <height>690</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: #212121;
-color: white;
-border-radius: 5px;
-
-</string>
-    </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
-    </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
-    </property>
-   </widget>
    <widget class="QFrame" name="watchFrame">
     <property name="geometry">
      <rect>
@@ -1367,7 +1275,7 @@ border-radius: 5px;
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #212121;
+     <string notr="true">background-color: rgba(33, 33, 33, 0.2);
 color: white;
 border-radius: 5px;
 </string>
@@ -1403,7 +1311,7 @@ border-radius: 5px;
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton{
-background-color: #171717;
+background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;
 }
@@ -1441,7 +1349,7 @@ QPushButton:hover {
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton{
-background-color: #171717;
+background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;
 }
@@ -1478,7 +1386,7 @@ QPushButton:hover {
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: #171717;
+      <string notr="true">background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;</string>
      </property>
@@ -1514,7 +1422,7 @@ border-radius: 5px;</string>
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton{
-background-color: #171717;
+background-color: rgba(23, 23, 23, 0.5);
 color: white;
 border-radius: 5px;
 }
@@ -1528,26 +1436,34 @@ QPushButton:hover {
      </property>
     </widget>
    </widget>
-   <widget class="QPushButton" name="startRecord">
+   <widget class="QLabel" name="turning_bg">
     <property name="geometry">
      <rect>
-      <x>1500</x>
-      <y>70</y>
-      <width>50</width>
-      <height>50</height>
+      <x>350</x>
+      <y>815</y>
+      <width>150</width>
+      <height>150</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
     <property name="styleSheet">
-     <string notr="true">background-color: #171717;
-color: white;
-border-top: white 3px solid;
-border-radius: 5px;</string>
+     <string notr="true">color: white;
+border-radius: 5px;
+</string>
     </property>
     <property name="text">
      <string/>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
-   <zorder>background_label</zorder>
+   <zorder>camera</zorder>
    <zorder>label</zorder>
    <zorder>title</zorder>
    <zorder>realTimeViewFrame</zorder>
@@ -1559,7 +1475,6 @@ border-radius: 5px;</string>
    <zorder>rotGripper</zorder>
    <zorder>gripper</zorder>
    <zorder>title_2</zorder>
-   <zorder>turning_bg</zorder>
    <zorder>rempFrame</zorder>
    <zorder>rovStatusFrame</zorder>
    <zorder>label_19</zorder>
@@ -1570,11 +1485,9 @@ border-radius: 5px;</string>
    <zorder>depth_hold_mode</zorder>
    <zorder>takephoto</zorder>
    <zorder>label_16</zorder>
-   <zorder>camera_frame</zorder>
-   <zorder>camera</zorder>
-   <zorder>turning</zorder>
    <zorder>watchFrame</zorder>
-   <zorder>startRecord</zorder>
+   <zorder>turning_bg</zorder>
+   <zorder>turning</zorder>
   </widget>
  </widget>
  <resources/>
