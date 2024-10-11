@@ -44,6 +44,7 @@ class CameraThread(QThread):
                     # cv2.imwrite(frame_filename, frame)
                     # cv2.imwrite(f"frame {i}",frame)
                 rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                rgb_image = cv2.rotate(rgb_image, cv2.ROTATE_180)
                 # cv2.imshow("555555",rotated_frame)
                 self.frame_updated.emit(rgb_image)
 
