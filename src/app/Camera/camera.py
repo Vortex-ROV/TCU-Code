@@ -12,6 +12,10 @@ class CameraThread(QThread):
     def __init__(self, address = "192.168.33.100", port = "5454"):
         super(CameraThread, self).__init__()
         options={
+            "jpeg_compression": True,
+            "jpeg_compression_quality": 50,
+            "jpeg_compression_fastdct": True,
+            "jpeg_compression_fastupsample": True,
             "max_retries":sys.maxsize
         }
         self.client = NetGear(
