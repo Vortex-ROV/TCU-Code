@@ -74,5 +74,23 @@
     "disarm": 8,
     "rotating_gripper_left": 9,
     "rotating_gripper_right": 10
+  },
+  "Logitech Extreme 3D": {
+    "buttons_cnt": 12,
+
+    "lateral": 0,
+    "forward": 1,
+    "throttle": 3,
+    "yaw": 2,
+
+    "gripper_1": 0,
+    "light": 1,
+    "arm_rotating_gripper": 2,
+    "gripper_2": 3,
+    "rotating_gripper_left": 4,
+    "rotating_gripper_right": 5,
+    "auto": 7,
+    "arm": 8,
+    "disarm": 9
   }
 }
