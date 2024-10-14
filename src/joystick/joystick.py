@@ -46,7 +46,7 @@ class JoyStick(QThread):
 
     def __map_axis(self, axis_value) -> int:
         base = 1500
-        range = 160
+        range = 300
         tolerance = 0.1
 
         if axis_value > tolerance or axis_value < -tolerance:
@@ -69,14 +69,14 @@ class JoyStick(QThread):
             self.__message.set_value(
                 "yaw",
                 self.__map_axis(
-                    (self.__joystick.get_axis(self.__configs["yaw_r"]) / 2 + 0.5)
-                    - (self.__joystick.get_axis(self.__configs["yaw_l"]) / 2 + 0.5)
+                    -(self.__joystick.get_axis(self.__configs["yaw_r"]) / 2 + 0.5)
+                    + (self.__joystick.get_axis(self.__configs["yaw_l"]) / 2 + 0.5)
                 ),
             )
 
         self.__message.set_value(
             "forward",
-            self.__map_axis(-self.__joystick.get_axis(self.__configs["forward"])),
+            self.__map_axis(self.__joystick.get_axis(self.__configs["forward"])),
         )
         self.__message.set_value(
             "lateral",
@@ -212,7 +212,6 @@ class JoyStick(QThread):
         self.__old_message = copy.deepcopy(self.__message)
         self.signal.emit(self.__message.bytes())
         time.sleep(0.01)
-        print(self.__message)
 
     def __handle_joystick_disconnect(self):
         if pygame.joystick.get_count() > 0 and self.__joystick is not None:
