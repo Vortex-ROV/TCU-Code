@@ -24,7 +24,7 @@ class CameraThread(QThread):
             protocol = "tcp",
             pattern = 1,
             receive_mode = True,
-            logging = True,
+            logging = False,
             # request_timeout = sys.maxsize,
             **options
         )
