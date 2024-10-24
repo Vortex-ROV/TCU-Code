@@ -1,5 +1,6 @@
 import cv2
 from vidgear.gears import NetGear
+from VideoRecorder import VideoRecorder
 
 class NetgearClient:
     """
@@ -27,27 +28,14 @@ class NetgearClient:
             **options
         )
 
-def setup_video_writer(frame_size, output_filename='D:\Vortex25\FramesUW\output1.mp4'):
-    """
-    Set up the video writer object.
-
-    Args:
-        frame_size (tuple): Size of the frames to record (width, height).
-        output_filename (str): Name of the output video file.
-
-    Returns:
-        cv2.VideoWriter: The video writer object.
-    """
-    fourcc = cv2.VideoWriter_fourcc(*'XVID')
-    return cv2.VideoWriter(output_filename, fourcc, 20.0, frame_size)
 
 def main():
     """
     Main function to receive, display, and optionally record frames from the server.
     """
     client = NetgearClient()
+    video_recorder = None
     recording = False
-    out = None
 
     while True:
         # Receive frames from the server
@@ -62,29 +50,27 @@ def main():
         flipped_frame = cv2.flip(frame, 0)
         cv2.imshow("Frame", flipped_frame)
 
-        # If recording, write the frame to the video file
-        if recording and out is not None:
-            out.write(flipped_frame)
 
         # Check for key presses
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):  # Exit the loop on 'q' key press
             break
-        elif key == ord('r') and not recording:  # Start recording on 'r' key press
+        elif key == ord('r') and video_recorder is None:  # Start recording on 'r' key press
             print("Recording started...")
             frame_size = (flipped_frame.shape[1], flipped_frame.shape[0])  # Get the frame size
-            out = setup_video_writer(frame_size)  # Initialize video writer
-            recording = True
-        elif key == ord('s') and recording:  # Stop recording on 's' key press
+            video_recorder = VideoRecorder(frame_size)  # Initialize video recorder
+            video_recorder.start_recording()
+        elif key == ord('s') and video_recorder is not None and video_recorder.recording:  # Stop recording on 's' key press
             print("Recording stopped.")
-            recording = False
-            if out is not None:
-                out.release()  # Release video writer
+            video_recorder.stop_recording()
+            video_recorder = None
+
+        # If recording, write the frame to the video file
+        if video_recorder is not None:
+            video_recorder.write_frame(flipped_frame)
 
     # Release resources
     client.client.close()
-    if out is not None:
-        out.release()  # Make sure video writer is released if still recording
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
