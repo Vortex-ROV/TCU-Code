@@ -1,6 +1,7 @@
 import cv2
 from vidgear.gears import NetGear
 from VideoRecorder import VideoRecorder
+from ArucoMarkerDetector import ArucoMarkerDetector
 
 class NetgearClient:
     """
@@ -35,7 +36,7 @@ def main():
     """
     client = NetgearClient()
     video_recorder = None
-    recording = False
+    aruco_detector = ArucoMarkerDetector()
 
     while True:
         # Receive frames from the server
@@ -45,6 +46,9 @@ def main():
         if frame is None:
             print("No more frames received. Exiting.")
             break
+
+        # Update the frame for ArUco marker detection
+        aruco_detector.update_frame(frame)
 
         # Display the frame
         flipped_frame = cv2.flip(frame, 0)
