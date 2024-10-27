@@ -1,5 +1,6 @@
 import datetime
 import cv2
+import os
 
 class VideoRecorder:
     """
@@ -10,7 +11,12 @@ class VideoRecorder:
         output_filename (str): Name of the output video file (default: 'output.mp4').
     """
 
-    def __init__(self, frame_size, output_filename=f'D:/Vortex25/FramesUW/output_{datetime.datetime.now()}.mp4'):
+    def get_num_of_files(directory):
+        list = os.listdir(directory)
+        number_files = len(list)
+        return number_files
+        
+    def __init__(self, frame_size, output_filename=f'D:/Vortex25/FramesUW/output_{get_num_of_files("D:/Vortex25/FramesUW/")}.mp4'):
         self.frame_size = frame_size
         self.output_filename = output_filename
         self.recording = False

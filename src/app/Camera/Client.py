@@ -1,7 +1,7 @@
 import cv2
 from vidgear.gears import NetGear
 from VideoRecorder import VideoRecorder
-from ArucoMarkerDetector import ArucoMarkerDetector
+from ArucoMarkerDetector import ArucoDetector
 
 class NetgearClient:
     """
@@ -15,7 +15,7 @@ class NetgearClient:
     def __init__(self, address="192.168.33.100", port="5454") -> None:
         options = {
             "jpeg_compression": True,
-            "jpeg_compression_quality": 50,
+            "jpeg_compression_quality": 80,
             "jpeg_compression_fastdct": True,
             "jpeg_compression_fastupsample": True
         }
@@ -36,7 +36,7 @@ def main():
     """
     client = NetgearClient()
     video_recorder = None
-    aruco_detector = ArucoMarkerDetector()
+    aruco_detector = ArucoDetector()
 
     while True:
         # Receive frames from the server
@@ -65,7 +65,6 @@ def main():
             video_recorder = VideoRecorder(frame_size)  # Initialize video recorder
             video_recorder.start_recording()
         elif key == ord('s') and video_recorder is not None and video_recorder.recording:  # Stop recording on 's' key press
-            print("Recording stopped.")
             video_recorder.stop_recording()
             video_recorder = None
 
