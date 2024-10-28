@@ -50,9 +50,9 @@ def main():
         # Update the frame for ArUco marker detection
         aruco_detector.update_frame(frame)
 
-        # Display the frame
-        flipped_frame = cv2.flip(frame, 0)
-        cv2.imshow("Frame", flipped_frame)
+        # Display the processed frame from ArucoDetector
+        if aruco_detector.processed_frame is not None:
+            cv2.imshow("Frame", cv2.flip(aruco_detector.processed_frame,0))
 
 
         # Check for key presses
@@ -61,7 +61,7 @@ def main():
             break
         elif key == ord('r') and video_recorder is None:  # Start recording on 'r' key press
             print("Recording started...")
-            frame_size = (flipped_frame.shape[1], flipped_frame.shape[0])  # Get the frame size
+            frame_size = (frame.shape[1], frame.shape[0])  # Get the frame size
             video_recorder = VideoRecorder(frame_size)  # Initialize video recorder
             video_recorder.start_recording()
         elif key == ord('s') and video_recorder is not None and video_recorder.recording:  # Stop recording on 's' key press
@@ -70,7 +70,7 @@ def main():
 
         # If recording, write the frame to the video file
         if video_recorder is not None:
-            video_recorder.write_frame(flipped_frame)
+            video_recorder.write_frame(frame)
 
     # Release resources
     client.client.close()
