@@ -4,11 +4,39 @@ import threading
 from communication.message import Message
 from communication.companion_link import CompanionLink
 
+class PIDController:
+    def __init__(self, kp, ki, kd):
+        self.kp = kp
+        self.ki = ki
+        self.kd = kd
+
+        self.prev_error_x = 0
+        self.integral_x = 0
+
+        self.prev_error_y = 0
+        self.integral_y = 0
+
+    def update(self, error_x, error_y):
+        self.integral_x += error_x
+        self.integral_y += error_y
+        derivative_x = error_x - self.prev_error_x
+        derivative_y = error_y - self.prev_error_y
+
+        output_x = self.kp * error_x + self.ki * self.integral_x + self.kd * derivative_x
+        output_y = self.kp * error_y + self.ki * self.integral_y + self.kd * derivative_y
+
+        self.prev_error_x = error_x
+        self.prev_error_y = error_y
+
+        return output_x, output_y
+
 class ArucoDetector:
     def __init__(self):
 
         self.companion_link = CompanionLink(address="192.168.33.1", port=4096)
         self.companion_link.client.connect()
+        self.pid = PIDController(kp=0.1, ki=0.01, kd=0.01)
+        
         # Set the dictionary and parameters for detecting ArUco markers
         self.aruco_dict = cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_6X6_100)
         self.parameters = cv2.aruco.DetectorParameters()
@@ -91,6 +119,7 @@ class ArucoDetector:
                 if distance_to_center > center_radius:
                     self.move_camera(x_diff, y_diff)
                 else:
+                    self.pid.update(x_diff, y_diff)
                     self.companion_link.send_control_commands(Message().bytes())
                     print("Marker is within the center circle. No movement needed.")
 
@@ -110,20 +139,34 @@ class ArucoDetector:
             y_diff: Difference between the center of the frame and the marker on the y-axis.
         """
         message = Message()
+
+        # Update the camera position based on the PID controller
+        x_output, y_output = self.pid.update(x_diff, y_diff)
+
         if abs(x_diff) > 10:
             message.set_value("armed", True)
-            if x_diff > 0:
-                message.set_value("lateral", 1600)
-            else:
-                message.set_value("lateral",1400)
-            # print("Move Right" if x_diff > 0 else "Move Left")
+            message.set_value("lateral", 1500 + int(x_output))
         if abs(y_diff) > 10:
             message.set_value("armed", True)
-            if y_diff > 0:
-                message.set_value("forward", 1600)
-            else:
-                message.set_value("forward", 1400)
-            # print("Move Down" if y_diff > 0 else "Move Up")
+            message.set_value("forward", 1500 + int(y_output))
+
+        print(message.get_value("lateral"), message.get_value("forward"))
+
+
+        # if abs(x_diff) > 10:
+        #     message.set_value("armed", True)
+        #     if x_diff > 0:
+        #         message.set_value("lateral", 1600)
+        #     else:
+        #         message.set_value("lateral",1400)
+        #     # print("Move Right" if x_diff > 0 else "Move Left")
+        # if abs(y_diff) > 10:
+        #     message.set_value("armed", True)
+        #     if y_diff > 0:
+        #         message.set_value("forward", 1600)
+        #     else:
+        #         message.set_value("forward", 1400)
+        #     # print("Move Down" if y_diff > 0 else "Move Up")
 
         self.companion_link.send_control_commands(message.bytes())
 
