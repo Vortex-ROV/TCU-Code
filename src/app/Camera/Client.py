@@ -29,7 +29,6 @@ class NetgearClient:
             **options
         )
 
-
 def main():
     """
     Main function to receive, display, and optionally record frames from the server.
@@ -37,6 +36,7 @@ def main():
     client = NetgearClient()
     video_recorder = None
     aruco_detector = ArucoDetector()
+    detection_mode = False  # Start with detection mode off
 
     while True:
         # Receive frames from the server
@@ -47,18 +47,25 @@ def main():
             print("No more frames received. Exiting.")
             break
 
-        # Update the frame for ArUco marker detection
-        aruco_detector.update_frame(frame)
+        # Process frame based on the current mode
+        if detection_mode:
+            # Update the frame for ArUco marker detection
+            aruco_detector.update_frame(frame)
 
-        # Display the processed frame from ArucoDetector
-        if aruco_detector.processed_frame is not None:
-            cv2.imshow("Frame", cv2.flip(aruco_detector.processed_frame,0))
-
+            # Display the processed frame from ArucoDetector
+            if aruco_detector.processed_frame is not None:
+                cv2.imshow("Frame", cv2.flip(aruco_detector.processed_frame, 0))
+        else:
+            # Display the original frame without processing
+            cv2.imshow("Frame", cv2.flip(frame, 0))
 
         # Check for key presses
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):  # Exit the loop on 'q' key press
             break
+        elif key == ord('d'):  # Toggle detection mode on 'd' key press
+            detection_mode = not detection_mode
+            print("Detection mode:", "ON" if detection_mode else "OFF")
         elif key == ord('r') and video_recorder is None:  # Start recording on 'r' key press
             print("Recording started...")
             frame_size = (frame.shape[1], frame.shape[0])  # Get the frame size
@@ -78,4 +85,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
