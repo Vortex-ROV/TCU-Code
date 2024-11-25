@@ -46,8 +46,8 @@ class JoyStick(QThread):
 
     def __map_axis(self, axis_value) -> int:
         base = 1500
-        range = 160
-        tolerance = 0.05
+        range = 300
+        tolerance = 0.1
 
         if axis_value > tolerance or axis_value < -tolerance:
             return int(axis_value * range + base)
@@ -59,16 +59,24 @@ class JoyStick(QThread):
             "throttle",
             self.__map_axis(self.__joystick.get_axis(self.__configs["throttle"])),
         )
-        self.__message.set_value(
-            "yaw",
-            self.__map_axis(
-                (self.__joystick.get_axis(self.__configs["yaw_r"]) / 2 + 0.5)
-                - (self.__joystick.get_axis(self.__configs["yaw_l"]) / 2 + 0.5)
-            ),
-        )
+
+        if self.__joystick_name == "Logitech Extreme 3D":
+            self.__message.set_value(
+                "yaw",
+                self.__map_axis(self.__joystick.get_axis(self.__configs["yaw"])),
+            )
+        else:
+            self.__message.set_value(
+                "yaw",
+                self.__map_axis(
+                    -(self.__joystick.get_axis(self.__configs["yaw_r"]) / 2 + 0.5)
+                    + (self.__joystick.get_axis(self.__configs["yaw_l"]) / 2 + 0.5)
+                ),
+            )
+
         self.__message.set_value(
             "forward",
-            self.__map_axis(-self.__joystick.get_axis(self.__configs["forward"])),
+            self.__map_axis(self.__joystick.get_axis(self.__configs["forward"])),
         )
         self.__message.set_value(
             "lateral",
@@ -127,6 +135,7 @@ class JoyStick(QThread):
         if (
             self.__joystick_name == "Xbox 360 Controller"
             or self.__joystick_name == "Controller (Xbox One For Windows)"
+            or self.__joystick_name == "Logitech Extreme 3D"
         ):
             if self.__joystick.get_hat(0)[0] == 1:
                 self.__message.set_value("flight_mode", "S")
@@ -201,7 +210,6 @@ class JoyStick(QThread):
             return
 
         self.__old_message = copy.deepcopy(self.__message)
-        print(len(self.__message.bytes()))
         self.signal.emit(self.__message.bytes())
         time.sleep(0.01)
 

@@ -1,5 +1,5 @@
-# from .Camera.camera import Camera
-from .Camera.stream import Stream
+from .Camera.camera import Camera
+# from .Camera.stream import Stream
 from .Stopwatch.stopwatch import Stopwatch
 from .Controls.move import Move
 from .Controls.grippers import Grippers
@@ -10,7 +10,7 @@ from .Status.status import Status
 
 class Backend():
     def setupUi(self, ui):
-        self.image = Stream(ui)
+        self.image = Camera(ui)
         self.stopwatch = Stopwatch(ui)
         self.moving = Move(ui)
         self.grippers = Grippers(ui)

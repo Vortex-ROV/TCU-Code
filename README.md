@@ -10,7 +10,7 @@ Welcome to the repository for the Topside Control Unit (TCU) of Vortex ROV! This
   
 ## Introduction
 
-The Topside Control Unit (TCU) serves as the primary interface for controlling the Vortex ROV during underwater operations. It enables operators to monitor real-time data, stream video feeds, and send commands to the ROV, ensuring precise control and mission success.
+The Topside Control Unit (TCU) is the primary interface for controlling the Vortex ROV during underwater operations. It enables operators to monitor real-time data, stream video feeds, and send commands to the ROV, ensuring precise control and mission success.
 
 ## Installation
 
@@ -21,13 +21,29 @@ To set up the TCU software on your development environment, follow these steps:
    git clone https://github.com/Vortex-ROV/TCU-Code.git
    cd TCU-Code
    ```
+   
+2. **Create and Activate a Virtual Environment:**
 
-2. **Install Packaged Dependencies:**
+   It's a good practice to use a virtual environment to manage dependencies. Run the following commands to create and activate one:
+
+   - On macOS/Linux:
+     ```bash
+     python3 -m venv venv
+     source venv/bin/activate
+     ```
+
+   - On Windows:
+     ```bash
+     python -m venv venv
+     venv\Scripts\activate
+     ```
+
+3. **Install Packaged Dependencies:**
    ```bash
    pip install .
    ```
 
-3. **Run the TCU Software:**
+4. **Run the TCU Software:**
    ```bash
    python main.py
    ```

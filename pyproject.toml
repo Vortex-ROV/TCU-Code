@@ -22,5 +22,7 @@ dependencies = [
     "requests==2.32.3",
     "tqdm==4.66.5",
     "urllib3==2.2.3", 
-    "vidgear==0.3.3"
+    "vidgear==0.3.3",
+    "pyzmq==26.2.0",
+    "simplejpeg==1.7.6"
 ]

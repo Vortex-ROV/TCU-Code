@@ -7,7 +7,7 @@ class CompanionLink(QThread):
     sensors_to_gui_signal = pyqtSignal(bytes)
     connected_signal = pyqtSignal(bool)
 
-    def __init__(self, address="192.168.33.1", port=12345, buffer_size=51):
+    def __init__(self, address="192.168.33.1", port=4096, buffer_size=51):
         super().__init__()
 
         self.client = ClientSocket(address, port, self.connected_signal)
